@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
-from datetime import date
+from datetime import date as date_type
 
 from models import SessionLocal, User, Habit, HabitCheck, CoachingSuggestion
 from ai_service import generate_coaching_suggestion, generate_weekly_insights
@@ -29,6 +29,8 @@ def get_current_user(db=Depends(get_db)) -> User:
     return user
 
 class HabitOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     name: str
     description: Optional[str] = None
@@ -36,11 +38,8 @@ class HabitOut(BaseModel):
     created_at: str
     updated_at: str
 
-    class Config:
-        orm_mode = True
-
 class CheckInIn(BaseModel):
-    date: date = Field(..., description="Date of the check‑in (YYYY‑MM‑DD)")
+    date: date_type = Field(..., description="Date of the check‑in (YYYY‑MM‑DD)")
     notes: Optional[str] = Field(None, description="Optional notes for the check‑in")
 
 @router.get("/habits", response_model=dict)
