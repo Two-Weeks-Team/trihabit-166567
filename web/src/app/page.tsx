@@ -40,10 +40,11 @@ export default function HomePage() {
   // fetch coaching when a habit is selected or after a check‑in
   useEffect(() => {
     if (!selectedHabit) return;
+    const habitId = selectedHabit.id;
     async function getCoaching() {
       setCoachingLoading(true);
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits/${selectedHabit.id}/coaching`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits/${habitId}/coaching`);
         if (!res.ok) throw new Error('Coaching fetch failed');
         const body = await res.json();
         setCoaching(body.suggestion);
