@@ -44,7 +44,7 @@ export default function HomePage() {
     async function getCoaching() {
       setCoachingLoading(true);
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits/${habitId}/coaching`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/habits/${habitId}/coaching`);
         if (!res.ok) throw new Error('Coaching fetch failed');
         const body = await res.json();
         setCoaching(body.suggestion);

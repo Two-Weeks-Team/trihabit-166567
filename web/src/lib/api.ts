@@ -1,5 +1,5 @@
 export async function fetchHabits() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/habits`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
     cache: 'no-store'
@@ -12,7 +12,7 @@ export async function fetchHabits() {
 }
 
 export async function checkInHabit(habitId: string, payload: { date: string; notes?: string }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits/${habitId}/check-in`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/habits/${habitId}/check-in`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
