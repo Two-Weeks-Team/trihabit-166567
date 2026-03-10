@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f5f8fa;
+  --foreground: #1a202c;
+  --primary: #2563eb; /* indigo-600 */
+  --accent: #10b981; /* emerald-500 */
+  --card: #ffffff;
+  --muted: #e5e7eb; /* gray-200 */
+  --border: #d1d5db; /* gray-300 */
+  --success: #16a34a; /* green-600 */
+  --warning: #ea580c; /* orange-600 */
+  --radius: 0.5rem;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+}
+
+html, body {
+  min-height: 100%;
+}
+
+/* subtle textured background */
+body {
+  background-image: radial-gradient(circle at 20% 20%, var(--primary) 0%, transparent 25%),
+                    radial-gradient(circle at 80% 80%, var(--accent) 0%, transparent 25%);
+  background-size: 200% 200%;
+  animation: backgroundMove 30s ease infinite;
+}
+
+@keyframes backgroundMove {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
